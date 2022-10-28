@@ -12,7 +12,7 @@ Both the live streaming server and the ESP32 module are connected over the MQTT 
 
 We’ve developed a few examples that might function as a starting point for experimentation. Each example has more detailed instructions inside. 
 
-1.	[Led](Code/MQTT_led/readme.md) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience. 
+1.	[Led](Code/MQTT_led/) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience. 
 2.	[Button](Code/MQTT_button/readme.md)  - In this first example we connect a button to the module. When the button is pressed a message is sent to the live streaming server. If the server receives this message it will show a specific emote. This allows the physical audience to interact with the audience on the live streaming platform. 
 3.	[Neopixel](Code/MQTT_neopixel/readme.md)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
 4.	[Relay](Code/MQTT_relay/readme.md)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
