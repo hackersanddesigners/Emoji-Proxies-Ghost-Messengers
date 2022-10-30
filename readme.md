@@ -19,8 +19,25 @@ We’ve developed a few examples that might function as a starting point for exp
 
 ## Installation
 
+In this workshop we'll use a few pre-prepared computers, but if you'd like to continue on your own machine follow the steps below.
+
 1. Download and install the Arduino IDE
 2. Install the ESP32 board
 3. Install the drivers
-4. Install some libraries.
+4. Install the needed libraries
 
+We've documented the installation process on the [Hackers & Designers wiki](https://wiki.hackersanddesigners.nl/index.php?title=ESP32_Arduino_Setup).
+Follow the steps on the linked page, but instead of installing the libraries mentioned in the article, install the libraries below. **`REPLACE STEP 5`** with these instructions:
+
+1. Open the library manager by going to the menu `Sketch` > `Include Library` > `Manage Libraries...`
+2. In the search field type: MQTT, scroll down until you find a library simply called MQTT by Joel Gaehwiller. Click in the install button and wait for the download to finish. Do not close the library manager.
+3. Now continue with step 6 in the article, but replace the code with this:
+```c
+#include <MQTT.h>
+
+void setup() {
+}
+
+void loop() {
+}  
+```
