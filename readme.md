@@ -19,9 +19,12 @@ We’ve developed a few examples that might function as a starting point for exp
 
 ### Breadboard
 
-To prototype we will be using a breadboard. 
+To build our prototypes we will be using a solderless breadboard. This is a little plastic board with holes in it. These holes let you easily insert electronic components to quickly test an electronic circuit without having to solder. There's more information on breadboards and how to use them on the links below the image.
+
 
 ![A breadboard](https://upload.wikimedia.org/wikipedia/commons/7/73/400_points_breadboard.jpg)
+
+* https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-breadboard
 * https://learn.adafruit.com/lesson-0-getting-started/breadboard
 
 
