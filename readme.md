@@ -17,6 +17,14 @@ We’ve developed a few examples that might function as a starting point for exp
 3.	[Neopixel](Code/MQTT_neopixel/)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
 4.	[Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
 
+### Breadboard
+
+To prototype we will be using a breadboard. 
+
+![A breadboard](https://upload.wikimedia.org/wikipedia/commons/7/73/400_points_breadboard.jpg)
+* https://learn.adafruit.com/lesson-0-getting-started/breadboard
+
+
 ## Installation
 
 In this workshop we'll use a few pre-prepared computers, but if you'd like to continue on your own machine follow the steps below.
@@ -31,7 +39,9 @@ Follow the steps on the linked page, but instead of installing the libraries men
 
 1. Open the library manager by going to the menu `Sketch` > `Include Library` > `Manage Libraries...`
 2. In the search field type: MQTT, scroll down until you find a library simply called MQTT by Joel Gaehwiller. Click in the install button and wait for the download to finish. Do not close the library manager.
-3. Now continue with step 6 in the article, but replace the code with this:
+3. Install ArduinoJson in the same way as the previous step.
+4. Lastly, also install the library called StringSplitter.
+4. Now continue with step 6 in the article, but replace the code with this:
 ```c
 #include <MQTT.h>
 
