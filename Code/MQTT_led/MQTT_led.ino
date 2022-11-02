@@ -1,12 +1,12 @@
 #include <WiFi.h>
 #include <MQTT.h>
 #include <ArduinoJson.h>
-// Install this library by going to menu Sketch > Include Libary > Manage Libraries...
+// If necessary: install this library by going to menu Sketch > Include Libary > Manage Libraries...
 // Search for StringSplitter and click Install.
 #include "StringSplitter.h" 
 
-char ssid[] = "Yellow Submarine";  // Replace with your network SSID
-char pass[] = "@chterhoek!";  // Replace with your network password
+char ssid[] = "wifi network name";  // Replace with your network SSID
+char pass[] = "wifi password";  // Replace with your network password
 char host[] = "test.mosquitto.org"; // don't change this.
 char topic[] = "inc-hmm"; // don't change this.
 String client_id = "esp1"; // but please DO change this :)
@@ -43,12 +43,13 @@ void loop() {
   if (!client.connected()) {
     Serial.println("lost connection");
     connectMqtt();
+		delay(5000); // prevent flooding the server
   }
 }
 
 /*	
-* This is where the real work happens...
-* This function is called when we receive a message over MQTT.
+* This is where the real work happens in this example...
+* The messageReceived function is called when we receive a message over MQTT.
 * Each message is formatted like this: 
 * `origin:command:parameter`
 * `origin` is the sender, here we're looking for messages received from `server`.
