@@ -61,8 +61,7 @@ void loop()
 * `origin:command:parameter`
 * `origin` is the sender, here we're looking for messages received from `server`.
 * `command` is the command to be executed, in this example it's the command `led` we're waiting for.
-* `parameter` can contain extra information, here it can be `on` to turn the led on and anything else in the 
-* parameter will turn the led off.
+* `parameter` can contain extra information, here its used to send the color for the strip
 * 
 * Here we're looking for a message in the format `server:rgb:#nnnnnn`, 
 * where the #nnnnnn part is a hexidecimal color code (see the readme)

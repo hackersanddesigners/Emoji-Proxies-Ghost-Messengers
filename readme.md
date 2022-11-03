@@ -17,6 +17,20 @@ We’ve developed a few examples that might function as a starting point for exp
 3.	[Neopixel](Code/MQTT_neopixel/)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
 4.	[Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
 
+
+### Message format
+
+In the code the messageReceived function is called when we receive a message over MQTT.
+Each message is formatted like this: `origin:command:parameter`
+
+* `origin` is the 'name' of the sender, this will be 'server' if the message originates from the server, otherwise the name that is set in the `client_id` string in the sketch.
+* `command` is the command to be executed, in this example it's the command `led` we're waiting for. TODO: @karl? Do we have a list of emotes? Other commands?
+* `parameter` can contain extra information, for example 'on' to turn a led on, or a color for the led strip example.
+
+The examples contain code to split the message string into its constituent parts.
+
+### Livestream link? 
+
 ### Breadboard
 
 To build our prototypes we will be using a solderless breadboard. This is a little plastic board with holes in it. These holes let you easily insert electronic components to quickly test an electronic circuit without having to solder. There's more information on breadboards and how to use them on the links below the image.
