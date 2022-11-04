@@ -3,21 +3,22 @@
 #include <ArduinoJson.h>
 // Install this library by going to menu Sketch > Include Libary > Manage Libraries...
 // Search for StringSplitter and click Install.
-#include "StringSplitter.h" 
+#include "StringSplitter.h"
 
 char ssid[] = "wifi network name";  // Replace with your network SSID
 char pass[] = "wifi password";  // Replace with your network password
 char host[] = "test.mosquitto.org"; // don't change this.
-char topic[] = "inc-hmm"; // don't change this.
-String client_id = "esp1"; // but please DO change this :)
+char topic[] = "inc-hmm";						// don't change this.
+String client_id = "esp1";					// but please DO change this :)
 
 WiFiClient wifiClient;
 MQTTClient client;
 
 #define RELAY_PIN 26
 
-void setup() {
-	Serial.begin(115200);			// serial communication for debugging
+void setup()
+{
+	Serial.begin(115200);				// serial communication for debugging
 	pinMode(RELAY_PIN, OUTPUT); // configure pin 26 as a output.
 
 	// start wifi and mqtt
@@ -25,55 +26,62 @@ void setup() {
 	client.begin(host, wifiClient);
 	client.onMessage(messageReceived); // call the messageReceived function when a message is received
 																		 // connect wifi and mqtt
-  connectWifi();
-  connectMqtt();
+	connectWifi();
+	connectMqtt();
 	// say hi
-  sendMessage("connect");
+	sendMessage("connect");
 }
 
 /*
  * The loop function continuously check for new MQTT messages
  */
-void loop() {
-  client.loop();
+void loop()
+{
+	client.loop();
 	// check if connected to the MQTT relay server
-  if (!client.connected()) {
-    Serial.println("lost connection");
-    connectMqtt();
+	if (!client.connected())
+	{
+		Serial.println("lost connection");
+		connectMqtt();
 		delay(5000); // prevent flooding the server
-  }
+	}
 }
 
-/*	
-* The messageReceived function is called when we receive a message over MQTT.
-* Each message is formatted like this: 
-* `origin:command:parameter`
-* `origin` is the sender, here we're looking for messages received from `server`.
-* `command` is the command to be executed, in this example it's the command `relay` we're waiting for.
-* `parameter` can contain extra information, here it can be `on` to turn the relay on and 
-* anything else in the parameter will turn the led off.
-*/
-void messageReceived(String &topic, String &payload) {
-  Serial.println(topic + ": " + payload);
-  
-  StringSplitter *splitter = new StringSplitter(payload, ':', 3);
-  int itemCount = splitter->getItemCount();
+/*
+ * The messageReceived function is called when we receive a message over MQTT.
+ * Each message is formatted like this:
+ * `origin:command:parameter`
+ * `origin` is the sender, here we're looking for messages received from `server`.
+ * `command` is the command to be executed, in this example it's the command `relay` we're waiting for.
+ * `parameter` can contain extra information, here it can be `on` to turn the relay on and
+ * anything else in the parameter will turn the led off.
+ */
+void messageReceived(String &topic, String &payload)
+{
+	Serial.println(topic + ": " + payload);
 
-  if ( itemCount == 3 ){ // we have properly formatted command
-    String origin = splitter->getItemAtIndex(0);
-    String command = splitter->getItemAtIndex(1);
-    String parameter = splitter->getItemAtIndex(2);
+	StringSplitter *splitter = new StringSplitter(payload, ':', 3);
+	int itemCount = splitter->getItemCount();
 
-    if( origin == "server" ){
-      if( command == "relay" ) {
-        if ( parameter == "on" ){
-          digitalWrite( RELAY_PIN, HIGH );
+	if (itemCount == 3)
+	{ // we have properly formatted command
+		String origin = splitter->getItemAtIndex(0);
+		String command = splitter->getItemAtIndex(1);
+		String parameter = splitter->getItemAtIndex(2);
+
+		if (origin == "server")
+		{
+			if (command == "relay")
+			{
+				if (parameter == "on")
+				{
+					digitalWrite(RELAY_PIN, HIGH);
 					delay(3000);
-          digitalWrite( RELAY_PIN, LOW );
-        }
-      }
-    }
-  }
+					digitalWrite(RELAY_PIN, LOW);
+				}
+			}
+		}
+	}
 }
 
 /* ---------------------- you can ignore code below this line --------------------- */

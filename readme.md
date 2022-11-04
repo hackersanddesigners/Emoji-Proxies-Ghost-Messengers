@@ -12,6 +12,8 @@ Both the live streaming server and the ESP32 module are connected over the MQTT 
 
 We’ve developed a few examples that might function as a starting point for experimentation. Each example has more detailed instructions inside. 
 
+Please change the client_id in the sketch to something unique, so that each device has its own id.
+
 1.	[Led](Code/MQTT_led/) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience. 
 2.	[Button](Code/MQTT_button/)  - In this first example we connect a button to the module. When the button is pressed a message is sent to the live streaming server. If the server receives this message it will show a specific emote. This allows the physical audience to interact with the audience on the live streaming platform. 
 3.	[Neopixel](Code/MQTT_neopixel/)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
@@ -52,15 +54,17 @@ In this workshop we'll use a few pre-prepared computers, but if you'd like to co
 4. Install the needed libraries
 
 We've documented the installation process on the [Hackers & Designers wiki](https://wiki.hackersanddesigners.nl/index.php?title=ESP32_Arduino_Setup).
-Follow the steps on the linked page, but instead of installing the libraries mentioned in the article, install the libraries below. **`REPLACE STEP 5`** with these instructions:
+Follow the steps on the linked page, but instead of installing the libraries mentioned in the article, install the libraries we need for the examples. To do that **`REPLACE STEP 5`** with these instructions:
 
 1. Open the library manager by going to the menu `Sketch` > `Include Library` > `Manage Libraries...`
 2. In the search field type: MQTT, scroll down until you find a library simply called MQTT by Joel Gaehwiller. Click in the install button and wait for the download to finish. Do not close the library manager.
-3. Install ArduinoJson in the same way as the previous step.
-4. Lastly, also install the library called StringSplitter.
-4. Now continue with step 6 in the article, but replace the code with this:
+3. Install `ArduinoJson`, `Adafruit Neopixel` and `StringSplitter` in the same way as the previous step.
+5. Now continue with step 6 in the article, but replace the code with this:
 ```c
 #include <MQTT.h>
+#include <ArduinoJson.h>
+#include <Adafruit_NeoPixel.h>
+#include <StringSplitter.h>
 
 void setup() {
 }
@@ -68,3 +72,4 @@ void setup() {
 void loop() {
 }  
 ```
+Press the verify button in the IDE (check mark, top left). If the code compiles without errors, you're all set.
