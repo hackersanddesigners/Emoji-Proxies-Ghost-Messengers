@@ -24,14 +24,12 @@ WiFiClient wifiClient;
 MQTTClient client;
 
 #define BTN_PIN 27
-#define LED_BUILTIN 26
 
 /*
 Setup get run when the ESP32 starts up. 
 */
 void setup() {
   Serial.begin(115200); // serial communication for debugging
-	pinMode(LED_PIN, OUTPUT); // configure pin 26 as a output. 
   pinMode(BTN_PIN, INPUT_PULLUP); // configure pin 27 as an input.
 	// we're using INPUT_PULLUP mode, this makes connecting a button 
 	// very easy. No resistors needed. 

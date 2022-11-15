@@ -2,11 +2,11 @@
 #include <MQTT.h>
 #include <ArduinoJson.h>
 
-char ssid[] = "wifi network name";  // Replace with your network SSID
-char pass[] = "wifi password";  // Replace with your network password
+char ssid[] = "Yellow Submarine";  // Replace with your network SSID
+char pass[] = "@chterhoek!";  // Replace with your network password
 char host[] = "test.mosquitto.org"; // don't change this.
 char topic[] = "inc-hmm"; // don't change this.
-String client_id = "esp1"; // but please change this :)
+String client_id = "esp1-button"; // but please change this :)
 
 WiFiClient wifiClient;
 MQTTClient client;
@@ -19,7 +19,6 @@ Setup get run when the ESP32 starts up.
 */
 void setup() {
   Serial.begin(115200); // serial communication for debugging
-	pinMode(LED_PIN, OUTPUT); // configure pin 26 as a output. 
   pinMode(BTN_PIN, INPUT_PULLUP); // configure pin 27 as an input.
 	// we're using INPUT_PULLUP mode, this makes connecting a button 
 	// very easy. No resistors needed. 
@@ -51,7 +50,7 @@ void loop() {
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   if ( digitalRead( BTN_PIN  ) == LOW ) { // if the button is pressed it will read as LOW here
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-    sendMessage("emoji", "woof"); // send the message
+    sendMessage("rotate"); // send the message
     delay(200); // debounce the button and prevent flooding the server.
   }
 }

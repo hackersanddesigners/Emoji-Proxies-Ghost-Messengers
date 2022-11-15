@@ -26,7 +26,8 @@ In the code the messageReceived function is called when we receive a message ove
 Each message is formatted like this: `origin:command:parameter`
 
 * `origin` is the 'name' of the sender, this will be 'server' if the message originates from the server, otherwise the name that is set in the `client_id` string in the sketch.
-* `command` is the command to be executed, in this example it's the command `led` we're waiting for. TODO: @karl? Do we have a list of emotes? Other commands?
+* `command` is the command to be executed. You can find per example commands in their respective .ino files.
+
 * `parameter` can contain extra information, for example 'on' to turn a led on, or a color for the led strip example.
 
 The examples contain code to split the message string into its constituent parts.
