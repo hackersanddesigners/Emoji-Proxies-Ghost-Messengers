@@ -6,7 +6,7 @@ char ssid[] = "wifi network name";	// Replace with your network SSID
 char pass[] = "wifi password";			// Replace with your network password
 char host[] = "test.mosquitto.org"; // don't change this.
 char topic[] = "inc-hmm"; // don't change this.
-String client_id = "esp1-button"; // but please change this :)
+String client_id = "esp1"; // but please change this :)
 
 WiFiClient wifiClient;
 MQTTClient client;
