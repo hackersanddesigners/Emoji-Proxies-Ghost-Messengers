@@ -1,18 +1,29 @@
+# MQTT Button
+
+In this example we connect to the MQTT server (topic hmm-inc) and wait for a button press. When the button is pressed we send the message `<client_id>:emoji:woof`. The livestreaming server listens for these messages and will respond by displaying the emote by that name. <client_id> is the unique id that you define in the sketch.
+
+There are comment in the code, also included below, that describe how this works. 
+
+Wire the button between pin D27 and GND on the arduino. In the images below you see how this should look on a breadboard and what it looks like as a circuit diagram. 
+
+![wiring](MQTT_button_bb.png)
+![wiring](MQTT_button_sch.png)
+
+```c
 #include <WiFi.h>
 #include <MQTT.h>
 #include <ArduinoJson.h>
 
-char ssid[] = "Esp";	// Replace with your network SSID
-char pass[] = "freewifi";			// Replace with your network password
+char ssid[] = "wifi network name";  // Replace with your network SSID
+char pass[] = "wifi password";  // Replace with your network password
 char host[] = "test.mosquitto.org"; // don't change this.
 char topic[] = "inc-hmm"; // don't change this.
-String client_id = "loestest"; // but please change this :)
+String client_id = "esp1"; // but please change this :)
 
 WiFiClient wifiClient;
 MQTTClient client;
 
 #define BTN_PIN 27
-#define LED_BUILTIN 26
 
 /*
 Setup get run when the ESP32 starts up. 
@@ -50,7 +61,7 @@ void loop() {
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   if ( digitalRead( BTN_PIN  ) == LOW ) { // if the button is pressed it will read as LOW here
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-    sendMessage("rotate"); // send the message
+    sendMessage("emoji", "woof"); // send the message
     delay(200); // debounce the button and prevent flooding the server.
   }
 }
@@ -110,3 +121,4 @@ void sendMessage(String message, String parameter) {
 void sendMessage(String message) {
   sendMessage(message, "");
 }
+```

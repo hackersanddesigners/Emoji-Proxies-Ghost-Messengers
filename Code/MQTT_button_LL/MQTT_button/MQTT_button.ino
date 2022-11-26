@@ -2,17 +2,19 @@
 #include <MQTT.h>
 #include <ArduinoJson.h>
 
-char ssid[] = "Esp";	// Replace with your network SSID
-char pass[] = "freewifi";			// Replace with your network password
+char ssid[] = "Fairphoneloes";	// Replace with your network SSID
+char pass[] = "szaszaszafloep";			// Replace with your network password
 char host[] = "test.mosquitto.org"; // don't change this.
 char topic[] = "inc-hmm"; // don't change this.
-String client_id = "loestest"; // but please change this :)
+String client_id = "loesloes"; // but please change this :)
 
 WiFiClient wifiClient;
 MQTTClient client;
 
+int buttonClicks = 0;
+
 #define BTN_PIN 27
-#define LED_BUILTIN 26
+#define LED_BUILTIN 2
 
 /*
 Setup get run when the ESP32 starts up. 
@@ -40,6 +42,7 @@ void setup() {
 * 
 */
 void loop() {
+  
   client.loop();
   // check if connected to the MQTT relay server
   if (!client.connected()) {
@@ -49,8 +52,31 @@ void loop() {
   }
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   if ( digitalRead( BTN_PIN  ) == LOW ) { // if the button is pressed it will read as LOW here
+    if(buttonClicks < 3){
+    buttonClicks ++;
+    Serial.println(buttonClicks);
+    } else {
+      buttonClicks = 0;
+      }
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-    sendMessage("rotate"); // send the message
+    
+    if(buttonClicks == 0){
+      sendMessage("rotate_speed","90");   // rotate website slowly
+      }
+
+    if(buttonClicks == 1){
+      sendMessage("rotate_speed", "60");  // rotate website a bit faster
+      }
+
+    if(buttonClicks == 2){
+      sendMessage("rotate_speed", "30"); // even faster 
+      }
+
+    if(buttonClicks == 3){
+      sendMessage("rotate_speed", "1"); // super fast
+      }
+                 
+//    sendMessage("rotate"); // send the message
     delay(200); // debounce the button and prevent flooding the server.
   }
 }
