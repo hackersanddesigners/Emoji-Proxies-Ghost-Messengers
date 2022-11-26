@@ -20,6 +20,17 @@ Please change the client_id in the sketch to something unique, so that each devi
 4.	[Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
 5.	[Servo](Code/MQTT_servo/)  - A servo is a motor that can be controlled to rotate from 0 to 180 degrees and anywhere in between. The message send from the live streaming platform controls the servo. 
 
+#### Libraries you need: 
+
+Install via Arduino IDE
+> Sketch > Include Library.... > Library manager
+
+Then you can search for these and install them:
+
+![ArduinoJSON](assets/Wifi.png)
+![MQTT library](assets/ArduinoJSON_lib.png)
+![ArduinoJSON](assets/MQTT_lib.png)
+
 
 ### Message format
 
