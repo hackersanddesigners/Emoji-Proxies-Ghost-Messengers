@@ -2,7 +2,7 @@
 #include <MQTT.h>
 #include <ArduinoJson.h>
 // Install this library by going to menu Sketch > Include Libary > Manage Libraries...
-// Search for ServoESP32 and click Install.
+// Search for ServoESP32 and click Install!
 #include <Servo.h>
 // Install this library by going to menu Sketch > Include Libary > Manage Libraries...
 // Search for StringSplitter and click Install.
