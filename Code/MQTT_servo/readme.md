@@ -1,5 +1,7 @@
 # MQTT Servo
 
+*For this example you need to install the ServoESP32 library!*
+
 A servo is a motor that can be controlled to rotate from 0 to 180 degrees and anywhere in between. The message send from the live streaming platform controls the servo. 
 
 The ESP32 module connects to the MQTT server (topic hmm-inc) and waits for the command:
