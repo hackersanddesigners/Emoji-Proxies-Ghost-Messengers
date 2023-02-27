@@ -48,9 +48,9 @@ The examples contain code to split the message string into its constituent parts
 
 #### In the Livestream chat
 
-Messages sent in the livestream chat from the online audience are recieved by the livestream server and forwarded over to the ESP32 devices in the physical space. This means that the `origin` is always the server. So the proper way to send commands to the ESP32 modules in the livestream chat is with the format `/command:parameter`, for example: `/led:on`.
+Messages sent in the livestream chat from the online audience are recieved by the livestream server and forwarded over to the ESP32 devices in the physical space. The proper way to send commands to the ESP32 modules in the livestream chat is with the format `/command:parameter`, for example: `/led:on`. For messages recieved from the chat, the `origin` is always the server, so the previous message would be received by the module as `server:led:on`.
 
-
+![](./assets/messages.drawio.png)
 
 ### Breadboard
 
