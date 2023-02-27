@@ -34,6 +34,8 @@ Then you can search for these and install them:
 
 ### Message format
 
+#### In the ESP32 module code:
+
 In the code the messageReceived function is called when we receive a message over MQTT.
 Each message is formatted like this: `origin:command:parameter`
 
@@ -44,7 +46,11 @@ Each message is formatted like this: `origin:command:parameter`
 
 The examples contain code to split the message string into its constituent parts.
 
-### Livestream link? 
+#### In the Livestream chat
+
+Messages sent in the livestream chat from the online audience are recieved by the livestream server and forwarded over to the ESP32 devices in the physical space. This means that the `origin` is always the server. So the proper way to send commands to the ESP32 modules in the livestream chat is with the format `/command:parameter`, for example: `/led:on`.
+
+
 
 ### Breadboard
 
