@@ -25,7 +25,8 @@
 - Relay modules
 To use with whacky flailing guy:
 - barreljack -> screwterminal connectors
-- 5-9V wallwarts with barreljack
+- 5-9V wallwarts with barreljack or powerbanks
+- Cut up USB cables for powerbank -> barrel connector
 - wacky flailing guys
 
 ## Servo example
