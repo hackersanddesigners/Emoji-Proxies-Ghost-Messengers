@@ -20,6 +20,8 @@ void setup()
 {
 	Serial.begin(115200);				// serial communication for debugging
 	pinMode(RELAY_PIN, OUTPUT); // configure pin 26 as a output.
+  digitalWrite(RELAY_PIN, HIGH); // The relays are 'inverted', the connection closes when the 
+                                  // input is LOW. So we set it to HIGH on startup.
 
 	// start wifi and mqtt
 	WiFi.begin(ssid, pass);
@@ -75,9 +77,11 @@ void messageReceived(String &topic, String &payload)
 			{
 				if (parameter == "on")
 				{
-					digitalWrite(RELAY_PIN, HIGH);
-					delay(3000);
-					digitalWrite(RELAY_PIN, LOW);
+					digitalWrite(RELAY_PIN, LOW); // turn on the relay, by making the input LOW
+					delay(3000);                  // wait for 3 seconds,
+					digitalWrite(RELAY_PIN, HIGH); // and turn the relay off again.
+					// Please note that the relay modules we are using have a active low input. 
+					// This means that making the input pin LOW, will turn 'on' the relay.
 				}
 			}
 		}
