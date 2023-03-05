@@ -28,7 +28,7 @@ To use with whacky flailing guy:
 - 5-9V wallwarts with barreljack
 - wacky flailing guys
 
-# Servo example
+## Servo example
 - Servos
 
 ## Other electronical materials
