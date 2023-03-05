@@ -41,3 +41,12 @@ To use with whacky flailing guy:
 - glue / hotglue
 - tape
 - markers / paint
+
+## Prepare
+Prepare examples on breadboard and setup proper wifi credentials:
+
+- Build examples:
+  - Whacky flailing man
+  - Scent
+  - Led
+  - RGB Led
