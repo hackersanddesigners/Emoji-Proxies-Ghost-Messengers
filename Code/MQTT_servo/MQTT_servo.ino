@@ -57,12 +57,16 @@ void loop()
   }
 
   if (goalPos < currentPos) {           // if currentPos is higher than goalPos...
+    currentPos--;                       // decrement by 1
+    servo.write(currentPos);            // update servo arm with new position
+  } else if (goalPos > currentPos) {    // if currentPos is lower than goalPos...
     currentPos++;                       // increment by 1
     servo.write(currentPos);            // update servo arm with new position
-  } else if (goalPos > currentPos) {    // if currentPos is lower than goalPos... 
-    currentPos--;                       // increment by -1
-    servo.write(currentPos);            // update servo arm with new position
   }
+  //  Serial.print("currentPos: ");
+  //  Serial.print(currentPos);
+  //  Serial.print( " goalPos: ");
+  //  Serial.println(goalPos);
   delay(100);
 }
 
@@ -93,6 +97,9 @@ void messageReceived(String &topic, String &payload)
       if (command == "servo")
       {
         goalPos = parameter.toInt();  // update value to store new angle command coming from chat
+        goalPos = constrain( goalPos, 0, 180);
+        Serial.print("Rotate to: ");
+        Serial.println(goalPos);
       }
     }
   }

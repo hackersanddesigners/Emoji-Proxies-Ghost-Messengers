@@ -50,7 +50,11 @@ String client_id = "esp1";					// but please DO change this :)
 WiFiClient wifiClient;
 MQTTClient client;
 
-#define SERVO_PIN 26
+#define SERVO_PIN 26  // connect the signal pin of your servo to pin 26
+
+int currentPos = 90;       // variable to save current position of servo arm
+int goalPos = 90;          // variable to save goal position of servo arm (coming from chat user)
+
 
 Servo servo;
 
@@ -58,6 +62,7 @@ void setup()
 {
   Serial.begin(115200);				// serial communication for debugging
   servo.attach(SERVO_PIN); // configure pin 26 for a servo signal.
+  servo.write(90);
 
   // start wifi and mqtt
   WiFi.begin(ssid, pass);
@@ -83,6 +88,19 @@ void loop()
     connectMqtt();
     delay(5000); // prevent flooding the server
   }
+
+  if (goalPos < currentPos) {           // if currentPos is higher than goalPos...
+    currentPos--;                       // decrement by 1
+    servo.write(currentPos);            // update servo arm with new position
+  } else if (goalPos > currentPos) {    // if currentPos is lower than goalPos...
+    currentPos++;                       // increment by 1
+    servo.write(currentPos);            // update servo arm with new position
+  }
+  //  Serial.print("currentPos: ");
+  //  Serial.print(currentPos);
+  //  Serial.print( " goalPos: ");
+  //  Serial.println(goalPos);
+  delay(100);
 }
 
 /*
@@ -111,12 +129,10 @@ void messageReceived(String &topic, String &payload)
     {
       if (command == "servo")
       {
-        int value = parameter.toInt();
-        if (value >= 0 && value <= 180 )
-        {
-          servo.write(value);
-          delay(100);
-        }
+        goalPos = parameter.toInt();  // update value to store new angle command coming from chat
+        goalPos = constrain( goalPos, 0, 180);
+        Serial.print("Rotate to: ");
+        Serial.println(goalPos);
       }
     }
   }
