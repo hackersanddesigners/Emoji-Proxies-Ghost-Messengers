@@ -52,3 +52,4 @@ Prepare examples on breadboard and setup proper wifi credentials:
   - Scent
   - Led
   - RGB Led
+  - ~Button~
