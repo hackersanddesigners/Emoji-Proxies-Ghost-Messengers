@@ -14,20 +14,20 @@ String client_id = "esp1";					// but please DO change this :)
 WiFiClient wifiClient;
 MQTTClient client;
 
-#define RELAY_PIN 26
+#define RELAY_PIN 4
 
 void setup()
 {
 	Serial.begin(115200);				// serial communication for debugging
 	pinMode(RELAY_PIN, OUTPUT); // configure pin 26 as a output.
-  digitalWrite(RELAY_PIN, HIGH); // The relays are 'inverted', the connection closes when the 
-                                  // input is LOW. So we set it to HIGH on startup.
+	digitalWrite(RELAY_PIN, HIGH); // The relays are 'inverted', the connection closes when the
+	// input is LOW. So we set it to HIGH on startup.
 
 	// start wifi and mqtt
 	WiFi.begin(ssid, pass);
 	client.begin(host, wifiClient);
 	client.onMessage(messageReceived); // call the messageReceived function when a message is received
-																		 // connect wifi and mqtt
+	// connect wifi and mqtt
 	connectWifi();
 	connectMqtt();
 	// say hi
@@ -80,7 +80,7 @@ void messageReceived(String &topic, String &payload)
 					digitalWrite(RELAY_PIN, LOW); // turn on the relay, by making the input LOW
 					delay(3000);                  // wait for 3 seconds,
 					digitalWrite(RELAY_PIN, HIGH); // and turn the relay off again.
-					// Please note that the relay modules we are using have a active low input. 
+					// Please note that the relay modules we are using have a active low input.
 					// This means that making the input pin LOW, will turn 'on' the relay.
 				}
 			}
