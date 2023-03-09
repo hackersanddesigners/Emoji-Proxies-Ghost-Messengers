@@ -1,5 +1,11 @@
 # MQTT Button
 
+***NOTE:***
+
+*This example shows how to wire a button to the ESP and some example code to deploy it. We won't use it in this workshop to modify the streaming platform but you can still use the example to e.g. turn off the relay or pixelstrip, turn off a light, or move the servo back to middle position.*
+
+**Previous uses (not used in this workshop)**
+
 In this example we connect to the MQTT server (topic hmm-inc) and wait for a button press. When the button is pressed we send the message `<client_id>:emoji:woof`. The livestreaming server listens for these messages and will respond by displaying the emote by that name. <client_id> is the unique id that you define in the sketch.
 
 There are comment in the code, also included below, that describe how this works. 
@@ -8,6 +14,19 @@ Wire the button between pin D27 and GND on the arduino. In the images below you 
 
 ![wiring](MQTT_button_bb.png)
 ![wiring](MQTT_button_sch.png)
+
+## Required libraries
+
+Install via Arduino IDE
+> Sketch > Include Library.... > Library manager
+
+Then you can search for these and install them:
+
+>>![ArduinoJSON](../../assets/Wifi.png)
+>>![MQTT library](../../assets/ArduinoJSON_lib.png)
+>>![ArduinoJSON](../../assets/MQTT_lib.png)
+
+## Code example
 
 ```c
 #include <WiFi.h>

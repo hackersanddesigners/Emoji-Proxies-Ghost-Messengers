@@ -9,6 +9,15 @@ The ESP32 module connects to the MQTT server (topic hmm-inc) and waits for the c
 
 There are comment in the code, also included below, that describe how this works. 
 
+## Chat messages + parameters Servo
+
+
+You can send these commands to move the arm of the servo. It has a range of 0-180 degrees. So 0 would be extreme left, 90 is in the middle, and 180 is extreme right. Any numbers in between will also work.
+
+* `/servo:0`
+* `/servo:90`
+* `/servo:180`
+
 ## simple setup
 
 Connect the servo as shown below. 
@@ -22,6 +31,21 @@ Connect the servo as shown below.
 ![wiring](MQTT_servo_bb.png)
 ![wiring](MQTT_servo_sch.png)
 
+## Required libraries
+
+Install via Arduino IDE
+> Sketch > Include Library.... > Library manager
+
+Then you can search for these and install them:
+
+>>![ArduinoJSON](../../assets/Wifi.png)
+>>![MQTT library](../../assets/ArduinoJSON_lib.png)
+>>![ArduinoJSON](../../assets/MQTT_lib.png)
+>>![Servo](../../assets/servo_lib.png)
+
+More info and examples about the servo library [here](https://www.arduino.cc/reference/en/libraries/servo/)
+
+
 ## Troubleshooting
 
 The servo uses a lot of energy, maybe more than the ESP32 can supply. This may cause errors (brown-outs).
@@ -29,6 +53,8 @@ We can use an external 5V source to power the servo. It could be batteries (as i
 
 ![wiring](MQTT_servo_bb_powered.png)
 ![wiring](MQTT_servo_sch_powered.png)
+
+## Code example
 
 ```arduino
 #include <WiFi.h>

@@ -6,6 +6,20 @@ We connect to the MQTT server (topic hmm-inc) and wait for the command:
 `server:rgb:#nnnnnn`. The #nnnnnn is a hexadecimal color code, like the color code used in HTML/CSS[^1]
 There are comment in the code, also included below, that describe how this works. 
 
+
+## Chat messages + parameters Neopixel
+
+The command is *rgb* and the parameter is a hexidecimal value that represents a color code. Use a color picker to find hexidecimal color codes (they start with a #)
+
+e.g.
+
+`/rgb:#ff33f6`
+
+You can use a tool to pick a color, it will give you the hexidecimal number you can include in the code: [HTML color codes](https://htmlcolorcodes.com/)
+
+
+## Wiring
+
 Wire GND like so:
 
 | Led Strip  | ESP32       |
@@ -18,9 +32,39 @@ In the images below you see how this should look on a breadboard and what it loo
 
 [^1] https://www.freecodecamp.org/news/how-hex-code-colors-work-how-to-choose-colors-without-a-color-picker/
 
-
 ![wiring](MQTT_neopixel_bb.png)
 ![wiring](MQTT_neopixel_sch.png)
+
+
+## Define number of pixels in the code
+
+Count the number of pixels on your strip. Find this line in the code:
+`define NUMPIXELS`
+
+If you have 8 pixels on your strip this should be set to 8. 
+
+## Required libraries
+
+Install via Arduino IDE
+> Sketch > Include Library.... > Library manager
+
+Then you can search for these and install them:
+
+>>![ArduinoJSON](../../assets/Wifi.png)
+>>![MQTT library](../../assets/ArduinoJSON_lib.png)
+>>![ArduinoJSON](../../assets/MQTT_lib.png)
+>>![Adafruit Neopixel](../../assets/adafruit_neopixel_lib.png)
+
+You can read more about the neopixel library functionalities [here:](https://github.com/adafruit/Adafruit_NeoPixel). Some useful functions: 
+
+* `pixels.clear();` turns all the pixels off
+* `pixels.show();` sends updated values to the pixel strip (update strip)
+* `pixels.setPixelColor(i, pixels.Color(r,g,b));`For example: `pixels.setPixelColor(0, pixels.Color(0, 0, 255));` sets the first pixel to pure blue. Usually is used in tandem with a *for loop* (starting with `for(int i=0; i<NUMPIXELS; i++)`) to update all pixels on the strip. 
+
+For detailed info: [Neopixel Uberguide](https://learn.adafruit.com/adafruit-neopixel-uberguide)
+
+## Code example
+
 
 ```c
 #include <WiFi.h>

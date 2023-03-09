@@ -16,6 +16,30 @@ Wire the led between pin D26 and GND on the arduino. In the images below you see
 ![wiring](MQTT_relay_bb.png)
 ![wiring](MQTT_relay_sch.png)
 
+## Chat messages + parameters Relay
+
+In the example only an ON state is described. The relay will turn on for 3 seconds and automatically turns off. 
+
+* `/relay:on`
+
+You can only turn a relay on or off (HIGH or LOW) in the code. 
+
+You can also use the relay to power long LED strips (which require a lot of power). See also [alternating ledstrips with a relay](http://www.techydiy.org/keyes-sr1y-relay-module/)
+
+## Required libraries
+
+Install via Arduino IDE
+> Sketch > Include Library.... > Library manager
+
+Then you can search for these and install them:
+
+>>![ArduinoJSON](../../assets/Wifi.png)
+>>![MQTT library](../../assets/ArduinoJSON_lib.png)
+>>![ArduinoJSON](../../assets/MQTT_lib.png)
+>>![StringSplitter](../../assets/stringsplitter_lib.png)
+
+## Code example
+
 ```arduino
 #include <WiFi.h>
 #include <MQTT.h>

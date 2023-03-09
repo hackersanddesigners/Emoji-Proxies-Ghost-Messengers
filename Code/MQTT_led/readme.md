@@ -8,6 +8,20 @@ Wire the led between pin D26 and GND on the arduino. In the images below you see
 ![wiring](MQTT_led_bb.png)
 ![wiring](MQTT_led_sch.png)
 
+## Required libraries
+
+Install via Arduino IDE
+> Sketch > Include Library.... > Library manager
+
+Then you can search for these and install them:
+
+>>![ArduinoJSON](../../assets/Wifi.png)
+>>![MQTT library](../../assets/ArduinoJSON_lib.png)
+>>![ArduinoJSON](../../assets/MQTT_lib.png)
+>>![StringSplitter](../../assets/stringsplitter_lib.png)
+
+## Code example
+
 ```c
 #include <WiFi.h>
 #include <MQTT.h>

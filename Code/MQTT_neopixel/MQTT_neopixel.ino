@@ -65,7 +65,7 @@ void loop()
 * 
 * Here we're looking for a message in the format `server:rgb:#nnnnnn`, 
 * where the #nnnnnn part is a hexidecimal color code (see the readme)
-* If we recieve this message and it is formatted properly, color all 
+* If we receive this message and it is formatted properly, color all 
 * the pixels of the ledstrip to this color.
 */
 
