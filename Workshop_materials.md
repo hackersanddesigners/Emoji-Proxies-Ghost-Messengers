@@ -23,7 +23,6 @@
 
 ## Relay example
 - Relay modules
-
 To use with whacky flailing guy:
 - barreljack -> screwterminal connectors
 - 5-9V wallwarts with barreljack or powerbanks
@@ -52,4 +51,3 @@ Prepare examples on breadboard and setup proper wifi credentials:
   - Scent
   - Led
   - RGB Led
-  - ~Button~
