@@ -1,5 +1,11 @@
 # Emoji Proxies & Ghost Messengers
 
+# Workshop Framer Framed
+
+Livestream link: https://live.thehmm.karls.computer/emoji-proxies-boo-2   
+Etherpad: TBD
+
+
 ## Introduction
 
 How can online visitors of cultural events feel seen, become more involved in or even have agency over what happens on-site? That is the central question during this workshop. To facilitate experimentation during this workshop we’ve developed a few prototypes or starting points. Each prototype uses an ESP32 module to communicate with the The Hmm live streaming platform. ESP32 is a hardware module that makes it relatively easy to connect buttons, lights and other electronics to a website. The diagram below illustrates how the module communicates with the live streaming platform. 
