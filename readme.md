@@ -4,26 +4,57 @@
 
 How can online visitors of cultural events feel seen, become more involved in or even have agency over what happens on-site? That is the central question during this workshop. To facilitate experimentation during this workshop we’ve developed a few prototypes or starting points. Each prototype uses an ESP32 module to communicate with the The Hmm live streaming platform. ESP32 is a hardware module that makes it relatively easy to connect buttons, lights and other electronics to a website. The diagram below illustrates how the module communicates with the live streaming platform. 
 
+## Examples 
+
+We’ve developed a few examples that might function as a starting point for experimentation. Each example has more detailed instructions inside for the code, libraries, a wiring diagram and a breadboard view.
+
+**Client ID**: Please change the client_id in the sketch to something unique, so that each device has its own id!
+
+1.	[Led](Code/MQTT_led/) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience. 
+2.	[Button](Code/MQTT_button/)  - In this first example we connect a button to the module. When the button is pressed a message is sent to the live streaming server. If the server receives this message it will show a specific emote. This allows the physical audience to interact with the audience on the live streaming platform. 
+3.	[Neopixel](Code/MQTT_neopixel/)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
+4.	[Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
+5.	[Servo](Code/MQTT_servo/)  - A servo is a motor that can be controlled to rotate from 0 to 180 degrees and anywhere in between. The message send from the live streaming platform controls the servo. 
+
+## Communication
 ![communication diagram](assets/flow.png)
 
 Both the live streaming server and the ESP32 module are connected over the MQTT protocol with an open MQTT server, and are able to send and receive messages. The online audience can send messages in the chat that will be forwarded to the ESP32 module and the ESP32 can do the reverse. 
 
-### Examples 
+## Message format
 
-We’ve developed a few examples that might function as a starting point for experimentation. Each example has more detailed instructions inside. 
+### In the ESP32 module code:
 
-Please change the client_id in the sketch to something unique, so that each device has its own id.
+In the code the messageReceived function is called when we receive a message over MQTT.
+Each message is formatted like this: `origin:command:parameter`
 
-* [Led](Code/MQTT_led/) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience. 
-* [Neopixel](Code/MQTT_neopixel/)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
-* [Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
-* [Servo](Code/MQTT_servo/)  - A servo is a motor that can be controlled to rotate from 0 to 180 degrees and anywhere in between. The message send from the live streaming platform controls the servo. 
+* `origin` is the 'name' of the sender, this will be 'server' if the message originates from the server, otherwise the name that is set in the `client_id` string in the sketch.
+* `command` is the command to be executed. You can find per example commands in their respective .ino files.
 
-You could also explore other actuators today (we have some more), the code in the examples then needs to be modified to match those components, but the ones above should give you enough to get going. 
+* `parameter` can contain extra information, for example 'on' to turn a led on, or a color for the led strip example.
 
-*Not used today as described, but potentially useful for reference:*
+The examples contain code to split the message string into its constituent parts.
 
-*	[Button](Code/MQTT_button/)  - In this example we connect a button to the module. When the button is pressed a message is sent to the live streaming server. If the server receives this message it will show a specific emote. This allows the physical audience to interact with the audience on the live streaming platform. 
+For example: the servo example has the `command` **servo** with a number as a `parameter`. The parameter will deceide how much the servo rotates. 
+
+### In the Livestream chat
+
+Messages sent in the livestream chat from the online audience are recieved by the livestream server and forwarded over to the ESP32 devices in the physical space. The proper way to send commands to the ESP32 modules in the livestream chat is with the format `/command:parameter`, for example: `/led:on`. For messages recieved from the chat, the `origin` is always the server, so the previous message would be received by the module as `server:led:on`.
+
+![](./assets/messages.drawio.png)
+
+The corresponding code in the sketch on the ESP32, looks like this:
+
+```arduino
+if( command == "led" ) {
+	if ( parameter == "on" ){
+		digitalWrite( LED_PIN, HIGH );
+	} else {
+		digitalWrite( LED_PIN, LOW );
+	}
+}
+```
+Since all commands (messages starting with a slash in the chat) get forwarded to the ESP32, you can easily add your own commands. IE, change "led" to "light" in the code above, and the command ```/led:on``` will turn on the led.
 
 ## Installation
 
@@ -135,3 +166,10 @@ To build our prototypes we will be using a solderless breadboard. This is a litt
 
 * https://www.sciencebuddies.org/science-fair-projects/references/how-to-use-a-breadboard
 * https://learn.adafruit.com/lesson-0-getting-started/breadboard
+
+## License
+
+Everything in this repo is licensed under the CC4r * COLLECTIVE CONDITIONS FOR RE-USE license.
+Copyleft Attitude with a difference - version 1.0
+
+[CC4r](https://constantvzw.org/wefts/cc4r.en.html)
