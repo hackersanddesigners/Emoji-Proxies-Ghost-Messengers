@@ -112,7 +112,7 @@ Press the verify button in the IDE (check mark, top left). If the code compiles 
 
 **For the servo example**
 
->>![Servo](assets/servo_lib.png)
+>>![Servo](assets/servolib.png)
 
 
 

@@ -41,7 +41,7 @@ Then you can search for these and install them:
 >>![ArduinoJSON](../../assets/Wifi.png)
 >>![MQTT library](../../assets/ArduinoJSON_lib.png)
 >>![ArduinoJSON](../../assets/MQTT_lib.png)
->>![Servo](../../assets/servo_lib.png)
+>>![Servo](../../assets/servolib.png)
 
 More info and examples about the servo library [here](https://www.arduino.cc/reference/en/libraries/servo/)
 
