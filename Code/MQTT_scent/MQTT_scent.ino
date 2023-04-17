@@ -18,6 +18,10 @@ MQTTClient client;
 #define BTN_RELAY_PIN 5
 #define PWR_RELAY_PIN 4
 
+bool power_relay_state = HIGH;
+bool scent_relay_state = HIGH;
+
+
 void setup() {
   Serial.begin(115200);            // serial communication for debugging
   pinMode(BTN_RELAY_PIN, OUTPUT);  // configure pin 26 as a output.
@@ -48,6 +52,16 @@ void loop() {
     connectMqtt();
     delay(5000);  // prevent flooding the server
   }
+
+  // update relay states based on current time
+  unsigned long current_time = millis();
+  if (scent_relay_state == LOW && current_time >= scent_relay_end_time) {
+    scent_relay_state = HIGH; // turn scent relay off
+  }
+
+  // update relay outputs
+  digitalWrite(PWR_RELAY_PIN, power_relay_state);
+  digitalWrite(BTN_RELAY_PIN, scent_relay_state);
 }
 
 /*
@@ -75,20 +89,18 @@ void messageReceived(String &topic, String &payload) {
     if (origin == "server") {
       if (command == "scent_power") {
         if (parameter == "on" || parameter == "") {
-          digitalWrite(PWR_RELAY_PIN, LOW); // turn power on
+          power_relay_state = LOW;  // turn power on
         } else if (parameter == "off") {
-          digitalWrite(PWR_RELAY_PIN, HIGH);
+          power_relay_state = HIGH;
         }
       }
       if (command == "scent") {
         if (parameter == "on" || parameter == "") {
-          digitalWrite(BTN_RELAY_PIN, LOW); // push & unpush button
-          delay(200);
-          digitalWrite(BTN_RELAY_PIN, HIGH);
+          scent_relay_state = LOW; // set scent relay to on
+          scent_relay_end_time = millis() + 200; // set time to turn scent relay off
         } else if (parameter == "long") {
-          digitalWrite(BTN_RELAY_PIN, LOW);
-          delay(3000);
-          digitalWrite(BTN_RELAY_PIN, HIGH);
+          scent_relay_state = LOW; // set scent relay to on
+          scent_relay_end_time = millis() + 3000; // set time to turn scent relay off
         }
       }
     }
