@@ -5,12 +5,12 @@
 // Search for StringSplitter and click Install.
 #include "StringSplitter.h"
 
-char ssid[] = "SSID";  // Replace with your network SSID
-char pass[] = "PASS";       // Replace with your network password
+char ssid[] = "";  // Replace with your network SSID
+char pass[] = "";       // Replace with your network password
 
 char host[] = "test.mosquitto.org";  // don't change this.
 char topic[] = "inc-hmm";            // don't change this.
-String client_id = "esp1";           // but please DO change this :)
+String client_id = "Hmmosphere";           // but please DO change this :)
 
 WiFiClient wifiClient;
 MQTTClient client;
@@ -20,7 +20,7 @@ MQTTClient client;
 
 bool power_relay_state = HIGH;
 bool scent_relay_state = HIGH;
-
+unsigned long scent_relay_end_time = millis() + 200;
 
 void setup() {
   Serial.begin(115200);            // serial communication for debugging
@@ -100,7 +100,7 @@ void messageReceived(String &topic, String &payload) {
           scent_relay_end_time = millis() + 200; // set time to turn scent relay off
         } else if (parameter == "long") {
           scent_relay_state = LOW; // set scent relay to on
-          scent_relay_end_time = millis() + 3000; // set time to turn scent relay off
+          scent_relay_end_time = millis() + 2500; // set time to turn scent relay off
         }
       }
     }
