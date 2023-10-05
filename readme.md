@@ -2,28 +2,28 @@
 
 ## Introduction
 
-How can online visitors of cultural events feel seen, become more involved in or even have agency over what happens on-site? That is the central question during this workshop. To facilitate experimentation during this workshop we’ve developed a few prototypes or starting points. Each prototype uses an ESP32 module to communicate with the The Hmm live streaming platform. ESP32 is a hardware module that makes it relatively easy to connect buttons, lights and other electronics to a website. The diagram below illustrates how the module communicates with the live streaming platform. 
+How can online visitors of cultural events feel seen, become more involved in or even have agency over what happens on-site? That is the central question during this workshop. To facilitate experimentation during this workshop we’ve developed a few prototypes or starting points. Each prototype uses an ESP32 module to communicate with the The Hmm live streaming platform. ESP32 is a hardware module that makes it relatively easy to connect buttons, lights and other electronics to a website. The diagram below illustrates how the module communicates with the live streaming platform.
 
-## Examples 
+## Examples
 
 We’ve developed a few examples that might function as a starting point for experimentation. Each example has more detailed instructions inside for the code, libraries, a wiring diagram and a breadboard view.
 
 **Client ID**: Please change the client_id in the sketch to something unique, so that each device has its own id!
 
-1.	[Led](Code/MQTT_led/) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience. 
+1.	[Led](Code/MQTT_led/) - A led is connected to the ESP32 module. When the online audience types a specific message in the chat the led will light up. So the interaction in this example is from online audience to the onsite audience.
 2.	[Neopixel](Code/MQTT_neopixel/)  - This example is more elaborate variation on the first example. A specifically crafted message on the live streaming platform can set the color of a led connected to the ESP32.
-3.	[Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man. 
-4.	[Servo](Code/MQTT_servo/)  - A servo is a motor that can be controlled to rotate from 0 to 180 degrees and anywhere in between. The message send from the live streaming platform controls the servo. 
+3.	[Relay](Code/MQTT_relay/)  - By connecting a relay (an electrically operated switch) we can turn on (and off) almost any device. Here we’ve connected a wacky flailing inflatable tube man.
+4.	[Servo](Code/MQTT_servo/)  - A servo is a motor that can be controlled to rotate from 0 to 180 degrees and anywhere in between. The message send from the live streaming platform controls the servo.
 
-For reference, the last example shows how to connect a button. Since we're focussing on communication from the live stream to the physical space in this workshop we're not going to go too deep into this. 
+For reference, the last example shows how to connect a button. Since we're focussing on communication from the live stream to the physical space in this workshop we're not going to go too deep into this.
 
-5.	[Button](Code/MQTT_button/)  - In this first example we connect a button to the module. When the button is pressed a message is sent to the live streaming server. If the server receives this message it will show a specific emote. This allows the physical audience to interact with the audience on the live streaming platform. 
+5.	[Button](Code/MQTT_button/)  - In this first example we connect a button to the module. When the button is pressed a message is sent to the live streaming server. If the server receives this message it will show a specific emote. This allows the physical audience to interact with the audience on the live streaming platform.
 
 
 ## Communication
 ![communication diagram](assets/flow.png)
 
-Both the live streaming server and the ESP32 module are connected over the MQTT protocol with an open MQTT server, and are able to send and receive messages. The online audience can send messages in the chat that will be forwarded to the ESP32 module and the ESP32 can do the reverse. 
+Both the live streaming server and the ESP32 module are connected over the MQTT protocol with an open MQTT server, and are able to send and receive messages. The online audience can send messages in the chat that will be forwarded to the ESP32 module and the ESP32 can do the reverse.
 
 ## Message format
 
@@ -39,7 +39,7 @@ Each message is formatted like this: `origin:command:parameter`
 
 The examples contain code to split the message string into its constituent parts.
 
-For example: the servo example has the `command` **servo** with a number as a `parameter`. The parameter will deceide how much the servo rotates. 
+For example: the servo example has the `command` **servo** with a number as a `parameter`. The parameter will deceide how much the servo rotates.
 
 ### In the Livestream chat
 
@@ -86,7 +86,7 @@ void setup() {
 }
 
 void loop() {
-}  
+}
 ```
 Press the verify button in the IDE (check mark, top left). If the code compiles without errors, you're all set.
 
@@ -148,11 +148,11 @@ You can use a tool to pick a color, it will give you the hexidecimal number you 
 
 **Chat messages + parameters Relay**
 
-In the example only an ON state is described. The relay will turn on for 3 seconds and automatically turns off. 
+In the example only an ON state is described. The relay will turn on for 3 seconds and automatically turns off.
 
 * `/relay:on`
 
-**Chat messages + parameters Servo** 
+**Chat messages + parameters Servo**
 
 You can send these commands to move the arm of the servo. It has a range of 0-180 degrees. So 0 would be extreme left, 90 is in the middle, and 180 is extreme right. Any numbers in between will also work.
 
