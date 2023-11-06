@@ -3,7 +3,7 @@
 #include <ArduinoJson.h>
 // Install this library by going to menu Sketch > Include Libary > Manage Libraries...
 // Search for ServoESP32 and click Install!
-#include <Servo.h>
+#include <ESP32Servo.h>
 // Install this library by going to menu Sketch > Include Libary > Manage Libraries...
 // Search for StringSplitter and click Install.
 #include "StringSplitter.h"
